@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Provides tools to compare fingerprint.
  */
-public class Fingerprint {
+public class Fingerprint { //test
 
   /**
    * The number of pixels to consider in each direction when doing the linear
