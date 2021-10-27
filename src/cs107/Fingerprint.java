@@ -68,7 +68,7 @@ public class Fingerprint { //test
   public static boolean[] getNeighbours(boolean[][] image, int row, int col) {
 	  assert (image != null); // special case that is not expected (the image is supposed to have been checked
                               // earlier)
-	  //TODO implement
+	  //TODO implement what is this?? hello
 	  return null;
   }
 
