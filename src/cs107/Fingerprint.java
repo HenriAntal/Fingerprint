@@ -68,12 +68,31 @@ public class Fingerprint {
   public static boolean[] getNeighbours(boolean[][] image, int row, int col) {
 	  assert (image != null); // special case that is not expected (the image is supposed to have been checked
                               // earlier)
-      for (int i = 1; i < (row-1); ++i) {
-          for (int j = 0; i < col; ++i) {
-              ArrayList<Boolean> image[i][j] = new ArrayList<Boolean>();
-
+      ArrayList<Boolean> neighbors = new ArrayList<Boolean>(); // stores the boolean value of all neighbors P0-P7
+      if((row != 0)&&(row != image.length)&&(col != 0)&&(col!= image[0].length)) // checks that only neighbors are being tested that exist
+      {
+          boolean p0 = image [row-1][col];
+          neighbors.add(p0);
+          boolean p1 = image [row-1][col+1];
+          neighbors.add(p1);
+          boolean p2 = image [row][col+1];
+          neighbors.add(p2);
+          boolean p3 = image [row+1][col+1];
+          neighbors.add(p3);
+          boolean p4 = image [row+1][col];
+          neighbors.add(p4);
+          boolean p5 = image [row+1][col-1];
+          neighbors.add(p5);
+          boolean p6 = image [row][col-1];
+          neighbors.add(p6);
+          boolean p7 = image [row-1][col-1];
+          neighbors.add(p7);
+      } else {                                  // This else should look at all the special cases (edges and corners)
+          if(row==0){
+              if
           }
       }
+
 
 
       //TODO implement
