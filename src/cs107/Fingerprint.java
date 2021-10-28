@@ -69,42 +69,34 @@ public class Fingerprint {
 	  assert (image != null); // special case that is not expected (the image is supposed to have been checked
                               // earlier)
       ArrayList<Boolean> neighbors = new ArrayList<Boolean>(8); // stores the boolean value of all neighbors p0-p7
-      boolean p0,p1,p2,p3,p4,p5,p6,p7;
+      boolean p0=false,p1=false,p2=false,p3=false,p4=false,p5=false,p6=false,p7=false;
 
           if ((row == 0)&&(col ==0 )){  //left upper corner
-              p0 = false;   p1 = false; p5 = false; p6 = false; p7 = false;
               p2 = image [row][col+1];  p3 = image [row+1][col+1];  p4 = image [row+1][col];
           }
 
           if((row== 0)&& (col == image [0].length)){    //right upper corner
-              p0 = false;   p1 = false; p2 = false; p3 = false; p7 = false;
               p4 = image [row+1][col];  p5 = image [row+1][col-1];  p6 = image [row][col-1];
           }
 
       if((row== image.length)&& (col == 0)){    //left lower corner
-          p3 = false;   p4 = false; p5 = false; p6 = false; p7 = false;
           p0 = image [row-1][col];  p1 = image [row-1][col+1];  p2 = image [row][col+1];
       }
       if((row== image.length)&& (col == image[0].length)){    //right lower corner
-          p1 = false;   p2 = false; p3 = false; p4 = false; p5 = false;
           p0 = image [row-1][col];  p6 = image [row][col-1]; p7 = image [row-1][col-1];
       }
 
 
       if((row == 0)&&(col!=0)&&(col!=image[0].length)){      //top edge without corners
-          p0 = false;   p1 = false; p7 = false;
           p2 = image [row][col+1];  p3 = image [row+1][col+1];  p4 = image [row+1][col]; p5 = image [row+1][col-1]; p6 = image [row][col-1];
       }
       if((row == image.length)&&(col!=0)&&(col!=image[0].length)){      //bottom edge without corners
-          p3 = false;   p4 = false; p5 = false;
           p0 = image [row-1][col];  p1 = image [row-1][col+1];  p2 = image [row][col+1];   p6 = image [row][col-1]; p7 = image [row-1][col-1];
       }
       if((row != 0) && (col==0) && (row != image.length)){      //left edge without corners
-          p5 = false;   p6 = false; p7 = false;
           p0 = image [row-1][col];  p1 = image [row-1][col+1];  p3 = image [row+1][col+1];  p4 = image [row+1][col];  p5 = image [row+1][col-1];
       }
       if((row != 0) && (col==image[0].length) && (row != image.length)){      //right edge without corners
-          p1 = false;   p2 = false; p3 = false;
           p0 = image [row-1][col];  p4 = image [row+1][col];  p5 = image [row+1][col-1];    p6 = image [row][col-1];    p7 = image [row-1][col-1];
       }
 
