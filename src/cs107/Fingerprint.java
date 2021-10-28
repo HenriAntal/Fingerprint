@@ -68,47 +68,48 @@ public class Fingerprint {
   public static boolean[] getNeighbours(boolean[][] image, int row, int col) {
 	  assert (image != null); // special case that is not expected (the image is supposed to have been checked
                               // earlier)
-      ArrayList<Boolean> neighbors = new ArrayList<Boolean>(8); // stores the boolean value of all neighbors p0-p7
+
       boolean p0=false,p1=false,p2=false,p3=false,p4=false,p5=false,p6=false,p7=false;
 
           if ((row == 0)&&(col ==0 )){  //left upper corner
               p2 = image [row][col+1];  p3 = image [row+1][col+1];  p4 = image [row+1][col];
           }
 
-          if((row== 0)&& (col == image [0].length)){    //right upper corner
+          if((row== 0)&& (col == image [0].length-1)){    //right upper corner
               p4 = image [row+1][col];  p5 = image [row+1][col-1];  p6 = image [row][col-1];
           }
 
-      if((row== image.length)&& (col == 0)){    //left lower corner
+      if((row== image.length-1)&& (col == 0)){    //left lower corner
           p0 = image [row-1][col];  p1 = image [row-1][col+1];  p2 = image [row][col+1];
       }
-      if((row== image.length)&& (col == image[0].length)){    //right lower corner
+      if((row== image.length-1)&& (col == image[0].length-1)){    //right lower corner
           p0 = image [row-1][col];  p6 = image [row][col-1]; p7 = image [row-1][col-1];
       }
 
 
-      if((row == 0)&&(col!=0)&&(col!=image[0].length)){      //top edge without corners
+      if((row == 0)&&(col!=0)&&(col!=image[0].length-1)){      //top edge without corners
           p2 = image [row][col+1];  p3 = image [row+1][col+1];  p4 = image [row+1][col]; p5 = image [row+1][col-1]; p6 = image [row][col-1];
       }
-      if((row == image.length)&&(col!=0)&&(col!=image[0].length)){      //bottom edge without corners
+      if((row == image.length-1)&&(col!=0)&&(col!=image[0].length-1)){      //bottom edge without corners
           p0 = image [row-1][col];  p1 = image [row-1][col+1];  p2 = image [row][col+1];   p6 = image [row][col-1]; p7 = image [row-1][col-1];
       }
-      if((row != 0) && (col==0) && (row != image.length)){      //left edge without corners
-          p0 = image [row-1][col];  p1 = image [row-1][col+1];  p3 = image [row+1][col+1];  p4 = image [row+1][col];  p5 = image [row+1][col-1];
+      if((row != 0) && (col==0) && (row != image.length-1)){      //left edge without corners
+          p0 = image [row-1][col];  p1 = image [row-1][col+1];  p2 = image [row][col+1];  p3 = image [row+1][col+1];  p4 = image [row+1][col];
       }
-      if((row != 0) && (col==image[0].length) && (row != image.length)){      //right edge without corners
+      if((row != 0) && (col==image[0].length-1) && (row != image.length-1)){      //right edge without corners
           p0 = image [row-1][col];  p4 = image [row+1][col];  p5 = image [row+1][col-1];    p6 = image [row][col-1];    p7 = image [row-1][col-1];
       }
 
 
-      if((row != 0)&&(row != image.length)&&(col != 0)&&(col!= image[0].length)) { // the usual case no border at all
+      if((row != 0)&&(row != image.length-1)&&(col != 0)&&(col!= image[0].length-1)) { // the usual case no border at all
           p0 = image[row - 1][col]; p1 = image[row - 1][col + 1];   p2 = image[row][col + 1];   p3 = image[row + 1][col + 1];
           p4 = image[row + 1][col];  p5 = image[row + 1][col - 1];  p6 = image[row][col - 1];   p7 = image[row - 1][col - 1];
       }
-      neighbors.add(p0);    neighbors.add(p1);  neighbors.add(p2);    neighbors.add(p3);    neighbors.add(p4);    neighbors.add(p5);    neighbors.add(p6);  neighbors.add(p7); // adds all the neighbours to the array
+
+      boolean truth[] = {p0,p1,p2,p3,p4,p5,p6,p7}; // table with all neighbours truths values
 
       //todo implement
-	  return null;
+	  return truth;
   }
 
   /**
@@ -121,9 +122,16 @@ public class Fingerprint {
    * @return the number of black neighbours.
    */
   public static int blackNeighbours(boolean[] neighbours) {
-	  //TODO implement
-	  return 0;
+      //TODO implement
+      int counter = 0;
+      for(int i = 0; i < 8; ++i) {
+          if(neighbours[i]) {
+              ++counter;
+          }
+      }
+      return counter;
   }
+
   
   /**
    * Computes the number of white to black transitions among the neighbours of
@@ -136,7 +144,16 @@ public class Fingerprint {
    */
   public static int transitions(boolean[] neighbours) {
 	  //TODO implement
-	  return 0;
+
+      int counter = 0;
+      for (int i = 0; i < 7; ++i) {
+          if (neighbours[i] == neighbours[i+1]) {
+
+          }else {
+              ++counter;
+          }
+      }
+      return counter;
   }
 
   /**
