@@ -68,34 +68,54 @@ public class Fingerprint {
   public static boolean[] getNeighbours(boolean[][] image, int row, int col) {
 	  assert (image != null); // special case that is not expected (the image is supposed to have been checked
                               // earlier)
-      ArrayList<Boolean> neighbors = new ArrayList<Boolean>(); // stores the boolean value of all neighbors P0-P7
-      if((row != 0)&&(row != image.length)&&(col != 0)&&(col!= image[0].length)) // checks that only neighbors are being tested that exist
-      {
-          boolean p0 = image [row-1][col];
-          neighbors.add(p0);
-          boolean p1 = image [row-1][col+1];
-          neighbors.add(p1);
-          boolean p2 = image [row][col+1];
-          neighbors.add(p2);
-          boolean p3 = image [row+1][col+1];
-          neighbors.add(p3);
-          boolean p4 = image [row+1][col];
-          neighbors.add(p4);
-          boolean p5 = image [row+1][col-1];
-          neighbors.add(p5);
-          boolean p6 = image [row][col-1];
-          neighbors.add(p6);
-          boolean p7 = image [row-1][col-1];
-          neighbors.add(p7);
-      } else {                                  // This else should look at all the special cases (edges and corners)
-          if(row==0){
-              if
+      ArrayList<Boolean> neighbors = new ArrayList<Boolean>(8); // stores the boolean value of all neighbors p0-p7
+      boolean p0,p1,p2,p3,p4,p5,p6,p7;
+
+          if ((row == 0)&&(col ==0 )){  //left upper corner
+              p0 = false;   p1 = false; p5 = false; p6 = false; p7 = false;
+              p2 = image [row][col+1];  p3 = image [row+1][col+1];  p4 = image [row+1][col];
           }
+
+          if((row== 0)&& (col == image [0].length)){    //right upper corner
+              p0 = false;   p1 = false; p2 = false; p3 = false; p7 = false;
+              p4 = image [row+1][col];  p5 = image [row+1][col-1];  p6 = image [row][col-1];
+          }
+
+      if((row== image.length)&& (col == 0)){    //left lower corner
+          p3 = false;   p4 = false; p5 = false; p6 = false; p7 = false;
+          p0 = image [row-1][col];  p1 = image [row-1][col+1];  p2 = image [row][col+1];
+      }
+      if((row== image.length)&& (col == image[0].length)){    //right lower corner
+          p1 = false;   p2 = false; p3 = false; p4 = false; p5 = false;
+          p0 = image [row-1][col];  p6 = image [row][col-1]; p7 = image [row-1][col-1];
       }
 
 
+      if((row == 0)&&(col!=0)&&(col!=image[0].length)){      //top edge without corners
+          p0 = false;   p1 = false; p7 = false;
+          p2 = image [row][col+1];  p3 = image [row+1][col+1];  p4 = image [row+1][col]; p5 = image [row+1][col-1]; p6 = image [row][col-1];
+      }
+      if((row == image.length)&&(col!=0)&&(col!=image[0].length)){      //bottom edge without corners
+          p3 = false;   p4 = false; p5 = false;
+          p0 = image [row-1][col];  p1 = image [row-1][col+1];  p2 = image [row][col+1];   p6 = image [row][col-1]; p7 = image [row-1][col-1];
+      }
+      if((row != 0) && (col==0) && (row != image.length)){      //left edge without corners
+          p5 = false;   p6 = false; p7 = false;
+          p0 = image [row-1][col];  p1 = image [row-1][col+1];  p3 = image [row+1][col+1];  p4 = image [row+1][col];  p5 = image [row+1][col-1];
+      }
+      if((row != 0) && (col==image[0].length) && (row != image.length)){      //right edge without corners
+          p1 = false;   p2 = false; p3 = false;
+          p0 = image [row-1][col];  p4 = image [row+1][col];  p5 = image [row+1][col-1];    p6 = image [row][col-1];    p7 = image [row-1][col-1];
+      }
 
-      //TODO implement
+
+      if((row != 0)&&(row != image.length)&&(col != 0)&&(col!= image[0].length)) { // the usual case no border at all
+          p0 = image[row - 1][col]; p1 = image[row - 1][col + 1];   p2 = image[row][col + 1];   p3 = image[row + 1][col + 1];
+          p4 = image[row + 1][col];  p5 = image[row + 1][col - 1];  p6 = image[row][col - 1];   p7 = image[row - 1][col - 1];
+      }
+      neighbors.add(p0);    neighbors.add(p1);  neighbors.add(p2);    neighbors.add(p3);    neighbors.add(p4);    neighbors.add(p5);    neighbors.add(p6);  neighbors.add(p7); // adds all the neighbours to the array
+
+      //todo implement
 	  return null;
   }
 
