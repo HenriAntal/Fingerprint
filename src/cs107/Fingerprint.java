@@ -68,7 +68,15 @@ public class Fingerprint {
   public static boolean[] getNeighbours(boolean[][] image, int row, int col) {
 	  assert (image != null); // special case that is not expected (the image is supposed to have been checked
                               // earlier)
-	  //TODO implement
+      for (int i = 1; i < (row-1); ++i) {
+          for (int j = 0; i < col; ++i) {
+              ArrayList<Boolean> image[i][j] = new ArrayList<Boolean>();
+
+          }
+      }
+
+
+      //TODO implement
 	  return null;
   }
 
