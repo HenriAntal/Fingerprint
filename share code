@@ -1,12 +1,10 @@
   public static int blackNeighbours(boolean[] neighbours) {
 	  //TODO implement
-	  int counter = 0;
-	  for (int i = 0; i < 7; ++i) {
-		  if (neighbours[i] == neighbours[i+1] {
-			  
-		  }else {
+	  counter = 0;
+	  for(int i = 0; i < 8; ++i) {
+		  if(neighbours[i]) {
 			  ++counter;
 		  }
 	  }
-	  return counter;
+	  return 0;
   }
